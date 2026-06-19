@@ -1,0 +1,35 @@
+# Daily Log - 18-06-2026
+
+## Today's Work
+
+* Created GitHub repository (Red-Team-Journey)
+* Created first Daily Log
+* Started OverTheWire Bandit
+* Completed Bandit Level 0
+* Completed Bandit Level 1
+* Learned SSH login
+* Learned pwd command
+* Learned ls command
+* Learned cat command
+
+## Challenges
+
+* Confused between /home and /home/bandit0
+* Used incorrect SSH username while logging into Bandit Level 1
+* Initially struggled to read a file named "-"
+
+## Lessons Learned
+
+* SSH connects to a remote Linux server
+* pwd shows the current working directory
+* ls lists files and directories
+* cat reads file contents
+* "." refers to the current directory
+* SSH login format: ssh username@hostname -p port
+* Special filenames may require "./" to access them
+
+## Tomorrow's Goal
+
+* Complete Bandit Level 2
+* Complete Bandit Level 3
+* Learn more Linux file navigation commands
