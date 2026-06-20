@@ -1,0 +1,17 @@
+# Bandit Level 2
+
+## Concept
+
+Files with spaces and special characters in filenames.
+
+## Commands Used
+
+ls
+cat
+
+## Lessons Learned
+
+- Filenames can contain spaces.
+- Quotes and escaping can be used for spaces.
+- Filenames beginning with "-" may be interpreted as command options.
+- "--" tells Linux to stop processing options and treat the following text as a filename.
