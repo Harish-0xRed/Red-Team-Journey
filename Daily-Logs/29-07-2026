@@ -1,0 +1,37 @@
+# Daily Log - 29-07-2026
+
+## 📚 Today's Learning
+
+### Linux Essentials - Chapter 10 Revision
+- Reviewed the complete Chapter 10: **Working With Text**.
+- Revised all major Linux text-processing commands:
+  - `cat`
+  - `less`
+  - `head`
+  - `tail`
+  - `sort`
+  - `wc`
+  - `cut`
+  - `grep`
+- Reviewed command pipelines (`|`) and I/O redirection (`>`, `>>`, `<`, `2>`, `&>`).
+- Revised Basic and Extended Regular Expressions used with `grep`.
+
+### Additional Learning
+- Learned the purpose of the `file` command.
+- Understood how Linux identifies files by examining their contents instead of relying only on file extensions.
+- Reviewed the `find` command and reinforced the difference between `STDOUT` and `STDERR`.
+
+### Roadmap Review
+- Officially completed **Linux Essentials Chapters 1–10**.
+- Reviewed the remaining Linux Essentials modules.
+- Prepared to begin **Chapter 11 – Shell Scripting**.
+
+## 💡 Lessons Learned
+- Linux text-processing commands become much more powerful when combined.
+- File extensions cannot always be trusted; the `file` command reveals the actual file type.
+- `STDOUT` and `STDERR` are separate streams and can be redirected independently.
+- Chapter 10 provides essential skills used in Linux administration, SOC analysis, and Red Team workflows.
+
+## 🎯 Tomorrow's Goal
+- Start **Linux Essentials Chapter 11 – Shell Scripting**.
+- Continue applying Linux knowledge in the OverTheWire Bandit challenges.
