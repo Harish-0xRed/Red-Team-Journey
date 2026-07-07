@@ -1,0 +1,28 @@
+# 📅 Daily Log - 07-07-2026
+
+## 📖 Linux Essentials - Chapter 12 Completed ✅
+
+### Topics Covered
+- Introduction to Computer Hardware
+- Motherboard Architecture
+- CPU (x86, x86_64, Multi-core, Multi-processor)
+- RAM and Swap Memory
+- Computer Buses (PCI & USB)
+- Peripheral Devices
+- Hard Drives and Linux Device Naming
+- MBR vs GPT Partition Tables
+- SSD vs HDD
+- Optical Drives and Mount/Unmount
+- Video Display Devices (GPU)
+- Power Supply Unit (PSU)
+
+### Linux Commands Practiced
+```bash
+arch
+lscpu
+free -m
+lspci
+lsusb
+ls /dev/sd*
+fdisk -l
+umount
