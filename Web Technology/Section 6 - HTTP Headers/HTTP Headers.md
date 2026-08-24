@@ -1,183 +1,136 @@
-# Section 5 — HTTP Status Codes
+# Section 6 — HTTP Headers
 
-HTTP status codes are the server's standardized 3-digit response to a client's request. They tell you immediately whether the request succeeded, redirected, was rejected, or crashed the backend server.
-
-```
-+─────────────────────────────────────────────────────────────────────────────+
-|                         HTTP STATUS CODE RANGES                             |
-+─────────────────────────────────────────────────────────────────────────────+
-  1xx  ──► Informational : "Request received, continuing process..."[cite: 2]
-  2xx  ──► Success       : "Action understood and accepted"[cite: 2]
-  3xx  ──► Redirection   : "Further action needed to complete request"[cite: 2]
-  4xx  ──► Client Error  : "Malformed syntax or unauthorized access"[cite: 2]
-  5xx  ──► Server Error  : "Server failed to fulfill a valid request"[cite: 2]
-+─────────────────────────────────────────────────────────────────────────────+
-
-```
+HTTP headers carry the metadata of every request and response, serving as a primary starting point for red team reconnaissance and exploitation.
 
 ---
 
-### The 5 Core Status Code Ranges
+### Request Headers (Client to Server)
 
-| Range | Class | Plain-Language Meaning | Red Team / SOC Relevance |
-| --- | --- | --- | --- |
-| **`1xx`** | Informational | *"Hold on, still working..."*<br> | Protocol upgrades (`101 Switching Protocols` to WebSockets). |
-| **`2xx`** | Success | *"Got it, here is your data."*<br> | Valid endpoint, clean execution, baseline response.
+| Header | What It Does | Attack Angle |
+| --- | --- | --- |
+| **`Host`**<br> | Specifies the target domain on the server.
 
- |
-| **`3xx`** | Redirection | *"The resource moved somewhere else."*<br> | Open Redirect attacks, finding hidden internal endpoints.
+ | **Host Header Injection:** Cache poisoning, password reset poisoning, or routing to internal virtual hosts.
 
  |
-| **`4xx`** | Client Error | *"You made a mistake or lack permission."*<br> | Directory fuzzing, authentication bypass testing, WAF drops.
+| **`User-Agent`**<br> | Identifies the client browser, OS, and version.
+
+ | **WAF / Filter Bypass:** Spoofing headers (e.g., impersonating Googlebot) to access restricted content.
 
  |
-| **`5xx`** | Server Error | *"The backend code/server crashed."*<br> | **High-value injection indicator** (SQLi, SSTI, RCE).
+| **`Cookie`**<br> | Sends stored session tokens to the server.
+
+ | **Session Hijacking:** Stealing or replaying session cookies to take over accounts.
+
+ |
+| **`Authorization`**<br> | Transmits credentials or bearer tokens (e.g., `Bearer <JWT>`).
+
+ | **Token Abuse:** JWT manipulation, brute forcing, or privilege escalation via forged tokens.
+
+ |
+| **`Content-Type`**<br> | Declares the MIME format of the request body.
+
+ | **Content-Type Confusion / File Upload Bypass:** Switching between `application/json` and `application/x-www-form-urlencoded` to bypass parsers.
+
+ |
+| **`Referer`**<br> | Indicates the previous page URL the user navigated from.
+
+ | **Information Leakage:** Exposes internal endpoints, sensitive parameters, or staging URLs.
+
+ |
+| **`X-Forwarded-For`**<br> | Identifies the originating client IP when routed through proxies.
+
+ | **IP Spoofing / ACL Bypass:** Setting `X-Forwarded-For: 127.0.0.1` to access restricted administrative panels.
+
+ |
+| **`Accept-Language`**<br> | Declares the client's preferred language.
+
+ | **Behavior Tampering:** Alters backend response localization, error output formats, or template handling.
 
  |
 
 ---
 
-### Most Important Status Codes for Red Teaming
+### Response Headers (Server to Client)
 
-**`200 OK`**
+| Header | What It Does | Attack Angle |
+| --- | --- | --- |
+| **`Set-Cookie`**<br> | Instructs the browser to store a cookie.
 
-* **Meaning:** The request succeeded and the payload is returned in the response body.
+ | **Missing Flags:** If `HttpOnly` is missing, cookies can be stolen via XSS; if `Secure` is missing, cookies can leak over unencrypted HTTP.
 
+ |
+| **`Location`**<br> | Specifies the target URL for redirects.
 
-* **Red Team Relevance:** The baseline normal state. Content-length variations on 200 responses help identify boolean-based SQL injection and directory bruteforcing hits.
+ | **Open Redirect:** Manipulating parameter inputs to force redirection to external malicious sites.
 
+ |
+| **`Server`**<br> | Identifies web server software and version.
 
+ | **Fingerprinting:** Identifies specific server builds to locate known public CVEs.
 
-**`201 Created`**
+ |
+| **`X-Powered-By`**<br> | Discloses backend framework and version.
 
-* **Meaning:** The request succeeded and a new resource was created on the server.
+ | **Stack Fingerprinting:** Identifies backend environments (e.g., PHP 7.2.0, Express, Laravel) to map the attack surface.
 
+ |
+| **`Content-Security-Policy`**<br> | Restricts sources for executable scripts and resources.
 
-* **Red Team Relevance:** Seen on successful user registration, file uploads, or API object creation.
+ | **XSS Exploitation:** If missing or improperly configured (`unsafe-inline`), Cross-Site Scripting payloads execute unrestricted.
 
+ |
+| **`Access-Control-Allow-Origin`**<br> | Defines Cross-Origin Resource Sharing (CORS) rules.
 
+ | **CORS Misconfiguration:** Setting `*` with credentials allows external sites to steal authenticated data.
 
-**`301 Moved Permanently` vs. `302 Found (Temporary Redirect)**`
+ |
+| **`Strict-Transport-Security`**<br> | Enforces HTTPS communication.
 
-* **Meaning:** The requested resource has moved. The server includes a `Location:` header telling the client where to go next.
+ | **SSL Stripping:** If missing, connections can be downgraded to unencrypted HTTP.
 
-
-* **Red Team Relevance:** `302` redirects are prime targets for **Open Redirect vulnerabilities** if the destination parameter is controllable (e.g., `/login?next=[https://evil.com](https://evil.com)`).
-
-
-
-**`400 Bad Request`**
-
-* **Meaning:** The server cannot parse the request due to invalid syntax or oversized headers.
-
-
-* **Red Team Relevance:** Useful when fuzzing API schema parameters or testing HTTP Request Smuggling payloads.
-
-
-
-**`401 Unauthorized`**
-
-* **Meaning:** Authentication is required and has failed or has not yet been provided (missing token or Basic Auth header).
-
-
-* **Red Team Relevance:** Marks the presence of a login gate. Targets for credential stuffing and brute-forcing.
-
-
-
-**`403 Forbidden`**
-
-* **Meaning:** The server understands the request, but **refuses to authorize it**.
-
-
-* **Red Team Relevance:** **The resource EXISTS, but you are blocked**. This is an invitation to test **403 Bypasses** (manipulating headers like `X-Forwarded-For: 127.0.0.1`, changing case `/admin` to `/Admin`, or using URL path normalization tricks `/admin/..;/admin`).
-
-
-
-**`404 Not Found`**
-
-* **Meaning:** The server cannot find the requested resource.
-
-
-* **Red Team Relevance:** The endpoint does not exist. Stop targeting that exact path and move on in directory discovery.
-
-
-
-**`405 Method Not Allowed`**
-
-* **Meaning:** The resource exists, but the HTTP method used (`GET`, `POST`, `DELETE`) is disabled.
-
-
-* **Red Team Relevance:** Change verbs! If `GET /api/user/1` returns `405`, try `POST`, `PUT`, or `PATCH` to access the endpoint.
-
-
-
-**`500 Internal Server Error`**
-
-* **Meaning:** An unhandled exception or crash occurred in the backend application code.
-
-
-* **Red Team Relevance:** **Goldmine**. Indicates your input broke backend execution logic (syntax errors in database queries, unhandled null pointers, or command injection crashes).
-
-
-
-**`502 Bad Gateway` / `504 Gateway Timeout**`
-
-* **Meaning:** The frontend reverse proxy (like Nginx) cannot reach or timed out waiting for the backend application server (like Node.js or Python).
-
-
-* **Red Team Relevance:** Can indicate successful Denial of Service (DoS) or a backend hanging due to a time-based blind SQL injection payload (e.g., `pg_sleep(10)`).
+ |
 
 ---
 
-### Critical Red Team Differences
+### Analyzing Response Headers
 
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                       CRITICAL TRIAGE DIFFERENCES                           │
-├─────────────────────────────────────────────────────────────────────────────┤
-│ 403 Forbidden  ──► Resource EXISTS, but permissions blocked[cite: 2].              │
-│                    Action: Try bypass techniques (Headers, IP spoofing,     │
-│                    path variations)[cite: 2].                                      │
-├─────────────────────────────────────────────────────────────────────────────┤
-│ 404 Not Found  ──► Resource DOES NOT EXIST on server[cite: 2].                     │
-│                    Action: Fuzz a different wordlist path[cite: 2].                │
-├─────────────────────────────────────────────────────────────────────────────┤
-│ 500 Error      ──► Your input broke something inside the backend[cite: 2].         │
-│                    Action: Dig deeper into the parameter — injection point  │
-│                    likely present[cite: 2]!                                        │
-└─────────────────────────────────────────────────────────────────────────────┘
+```http
+HTTP/1.1 200 OK
+Server: Apache/2.4.41                <-- Apache version -> search CVEs for this version[cite: 2]
+X-Powered-By: PHP/7.2.0             <-- PHP 7.2 -> old version, many known CVEs[cite: 2]
+Set-Cookie: session=abc123           <-- No HttpOnly flag -> vulnerable to XSS theft[cite: 2]
+Content-Security-Policy: (missing)  <-- No CSP -> XSS possible[cite: 2]
 
 ```
 
+These four header lines reveal the server software, backend runtime, exposure to cookie theft, and absence of XSS protections before launching an active exploit.
+
 ---
 
-### Practical Demonstration with `curl`
+### Practical Lab: Header Inspection with `curl`
 
-Test how web servers emit different status codes using `httpbin.org`:
+Inspect response headers directly in the terminal using `curl -I`:
 
 ```bash
-# 1. Test a 200 Success
-curl -I https://httpbin.org/status/200
+# 1. Fetch only response headers
+curl -I https://httpbin.org/get
 
-# 2. Test a 302 Redirect (Notice the Location header)
-curl -I https://httpbin.org/status/302
-
-# 3. Test a 403 Forbidden (Examine the blocked response)
-curl -I https://httpbin.org/status/403
-
-# 4. Test a 500 Backend Crash
-curl -I https://httpbin.org/status/500
+# 2. Send custom request headers (Spoofing User-Agent and X-Forwarded-For)
+curl -v https://httpbin.org/headers \
+     -H "User-Agent: Googlebot/2.1" \
+     -H "X-Forwarded-For: 127.0.0.1"
 
 ```
 
 ---
 
-### Reasoning Quiz 🧠
+### Key Technical Questions
 
-1. Why is receiving an `HTTP 403 Forbidden` often more interesting to a penetration tester during directory discovery than receiving an `HTTP 404 Not Found`?
-
-
-2. If sending a single quote (`'`) inside a search query parameter changes the server's response from `200 OK` to `500 Internal Server Error`, what type of vulnerability might you have found?
+1. How does setting `X-Forwarded-For: 127.0.0.1` enable an attacker to bypass an IP-based restriction on an administrative panel?
 
 
-3. If `GET /api/v1/deleteUser` returns `405 Method Not Allowed`, what should your immediate next test be?
+2. If a response header contains `Set-Cookie: session=xyz987; Secure`, but lacks `HttpOnly`, what attack is still possible?
+
+
+3. What reconnaissance value does the `X-Powered-By` header provide during the initial enumeration phase?
