@@ -1,5 +1,3 @@
-Absolutely bro 🔥 Chapter 5 is finished. Here is a clean **full-overview Markdown note** you can directly keep in your Wireshark notes.
-
 ````markdown
 # Wireshark — Chapter 5: File Input, Output, And Printing
 
@@ -813,7 +811,7 @@ Actual packet analysis
 
 ```
 
-Bro, **Chapter 5 is officially done.** ✅
+**Chapter 5 is officially done.** ✅
 
 And now the important milestone you were waiting for:
 
