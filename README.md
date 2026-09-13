@@ -3,6 +3,7 @@
 My journey from networking fundamentals to Red Team operations.
 
 Current Focus
+* Wireshark
 * Cisco Networking Basics
 * Linux Essentials
 * OverTheWire Bandit
@@ -25,7 +26,7 @@ Linux
 * Command Line Fundamentals
 
 Bandit
-* Level 0 Completed
+* Level 22 Completed
 
 Daily Logs
 Daily learning progress will be documented in this repository.
