@@ -43,5 +43,5 @@ Granular, day-by-day documentation of commands, tools tested, errors encountered
 ---
 
 ## Contact and Professional Networks
-* **LinkedIn:** :https://www.linkedin.com/in/harish-0xred/
+* **LinkedIn:** https://www.linkedin.com/in/harish-0xred/
 * **Email:** harish.29.vnr@gmail.com
