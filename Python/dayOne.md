@@ -1,3 +1,18 @@
+# 📘 Python Notes: Basics (Chapter 1)
+
+**Sections**
+1. Math Operators
+2. Order of Operations & SyntaxError
+3. Data Types
+4. Operators with Different Data Types
+5. Variables & Assignment Statements
+6. Variable Names
+7. Your First Python Program
+
+---
+
+# 1️⃣ Section 1: Math Operators
+
 ## 🧠 The operators you need
 
 | Operator | Meaning                |   Example | Result |
@@ -12,9 +27,7 @@
 
 Let's understand the **three new ones** because you already know `+ - * /`.
 
----
-
-# 1️⃣ `**` — Exponentiation
+## `**` — Exponentiation
 
 ```python
 2 ** 4
@@ -44,9 +57,7 @@ You should get:
 8
 ```
 
----
-
-# 2️⃣ `%` — Modulus / Remainder
+## `%` — Modulus / Remainder
 
 This one is **very important in programming**.
 
@@ -65,13 +76,7 @@ Ask:
 14 - 12 = 2
 ```
 
-So:
-
-```python
-14 % 4
-```
-
-gives:
+So `14 % 4` gives:
 
 ```text
 2
@@ -98,9 +103,7 @@ Therefore:
 
 It's the **remainder operator**.
 
----
-
-# 3️⃣ `//` — Integer Division
+## `//` — Integer Division
 
 Compare:
 
@@ -131,44 +134,22 @@ The book describes this as division where the result is **rounded down**.
 Another:
 
 ```python
-29 / 10
+29 / 10     # → 2.9
+29 // 10    # → 2
 ```
 
-→ `2.9`
-
-while:
-
-```python
-29 // 10
-```
-
-→ `2`
-
----
-
-# 🧪 Now I want you to experiment
+## 🧪 Now I want you to experiment
 
 You're already inside the Python REPL, so run these **yourself**:
 
 ```python
 2 ** 4
-```
-
-```python
 14 % 4
-```
-
-```python
 25 / 8
-```
-
-```python
 25 // 8
 ```
 
-Then make your own examples.
-
-For example:
+Then make your own examples. For example:
 
 ```python
 100 % 7
@@ -178,7 +159,7 @@ Don't ask me what the answer is first. **Predict → run → compare.**
 
 That's how I want you to learn Python.
 
-### 📝 Remember
+## 📝 Remember
 
 ```text
 ** → power
@@ -191,12 +172,13 @@ The most important one to really understand is `%`:
 
 > **`a % b` tells you the remainder after dividing `a` by `b`.**
 
+---
 
-##
-##
+# 2️⃣ Section 2: Order of Operations & SyntaxError
+
 > **When an expression has many operators, which part does Python calculate first?**
 
-This is important because Python doesn't simply calculate everything from left to right.
+Python doesn't simply calculate everything from left to right.
 
 ## 🧠 The order
 
@@ -208,11 +190,8 @@ Remember this order for now:
 3️⃣ + -         Addition/subtraction
 ```
 
-For operators at the **same level**, Python goes **left → right**.
-
-And **parentheses `()` can change the order**.
-
----
+- Operators at the **same level** are calculated **left → right**.
+- **Parentheses `()` can change the order.**
 
 ## 🧩 Example 1
 
@@ -239,15 +218,7 @@ But Python does `*` first:
 20
 ```
 
-So:
-
-```python
-2 + 3 * 6
-```
-
-→ **20**
-
----
+So `2 + 3 * 6` → **20**
 
 ## 🧩 Parentheses can change it
 
@@ -267,35 +238,24 @@ Parentheses first:
  30
 ```
 
-So:
+So `(2 + 3) * 6` → **30**
 
-```python
-(2 + 3) * 6
-```
-
-→ **30**
-
-### 🧠 This is the important idea:
+### 🧠 The important idea
 
 ```text
-2 + 3 * 6 → 20
-
+2 + 3 * 6   → 20
 (2 + 3) * 6 → 30
 ```
 
 Same numbers, same operators, but parentheses change the order.
 
----
-
-# 🔍 Now your big example
+## 🔍 The big example
 
 ```python
 (5 - 1) * ((7 + 1) / (3 - 1))
 ```
 
-Let's follow exactly what the image shows.
-
-### Step 1
+**Step 1**
 
 ```text
 (5 - 1)
@@ -309,7 +269,7 @@ Now:
 4 * ((7 + 1) / (3 - 1))
 ```
 
-### Step 2
+**Step 2**
 
 ```text
 (7 + 1)
@@ -323,7 +283,7 @@ Now:
 4 * (8 / (3 - 1))
 ```
 
-### Step 3
+**Step 3**
 
 ```text
 (3 - 1)
@@ -337,7 +297,7 @@ Now:
 4 * (8 / 2)
 ```
 
-### Step 4
+**Step 4**
 
 Division:
 
@@ -357,55 +317,20 @@ Now:
 16.0
 ```
 
-Therefore:
+Therefore `(5 - 1) * ((7 + 1) / (3 - 1))` → **16.0**
 
-```python
-(5 - 1) * ((7 + 1) / (3 - 1))
-```
-
-→ **16.0**
-
----
-
-# ⚠️ One thing about `16.0`
-
-You might ask:
-
-> Why `16.0` instead of `16`?
+## ⚠️ Why `16.0` instead of `16`?
 
 Because `/` is **normal division**, and Python produces a floating-point result.
 
-For example:
-
 ```python
-8 / 2
-```
-
-→
-
-```text
-4.0
-```
-
-while:
-
-```python
-8 // 2
-```
-
-→
-
-```text
-4
+8 / 2     # → 4.0
+8 // 2    # → 4
 ```
 
 We'll learn more about **integers and floats** shortly. Don't overthink it now.
 
----
-
-# 🧠 Parentheses = "Do this first"
-
-A very useful mental model:
+## 🧠 Parentheses = "Do this first"
 
 ```text
 ( )
@@ -413,7 +338,7 @@ A very useful mental model:
 Do this first
 ```
 
-For example:
+Example:
 
 ```python
 10 + (2 * 3)
@@ -431,11 +356,9 @@ Python handles:
   16
 ```
 
----
+## ❌ SyntaxError
 
-# ❌ SyntaxError
-
-The book then gives:
+The book gives:
 
 ```python
 5 +
@@ -447,9 +370,7 @@ Python can't understand it because you're saying:
 5 + ???
 ```
 
-**Add 5 to what?**
-
-So:
+**Add 5 to what?** So:
 
 ```text
 SyntaxError
@@ -468,15 +389,11 @@ Python sees:
        ↑
 ```
 
-You can't put `+` and `*` together like that.
-
-Again:
+You can't put `+` and `*` together like that. Again:
 
 ```text
 SyntaxError
 ```
-
----
 
 ## 🎯 The bigger lesson
 
@@ -486,47 +403,25 @@ This:
 
 > `This is a grammatically correct English sentence.`
 
-has a valid structure.
-
-But:
+has a valid structure. But:
 
 > `This grammatically is sentence not English correct a.`
 
 contains English words, but the **structure is wrong**.
 
-Python is similar.
-
-```python
-2 + 3 * 6
-```
-
-has valid Python structure.
-
-But:
-
-```python
-5 +
-```
-
-doesn't.
-
-So:
+Python is similar. `2 + 3 * 6` has valid Python structure. But `5 +` doesn't.
 
 > **Syntax = the rules for how Python code must be structured.**
 
----
-
-### 📝 Remember these three things
+## 📝 Remember these three things
 
 ```text
-Precedence → tells Python what to calculate first.
-
+Precedence  → tells Python what to calculate first.
 Parentheses → let you explicitly control the order.
-
 SyntaxError → Python cannot understand the structure of your code.
 ```
 
-And bro, **definitely run these examples yourself in your REPL**. Especially:
+And bro, **definitely run these examples yourself in your REPL**:
 
 ```python
 2 + 3 * 6
@@ -537,13 +432,15 @@ And bro, **definitely run these examples yourself in your REPL**. Especially:
 
 The last one is useful because you'll see a syntax error **without anything being broken**. That's exactly what the chapter wants you to become comfortable with.
 
-##
-##
+---
+
+# 3️⃣ Section 3: Data Types
+
 ## 🧠 What is a data type?
 
 A **data type is a category that tells Python what kind of value something is.**
 
-The three types introduced here are:
+The three types introduced here:
 
 ```text
 int   → whole numbers
@@ -551,13 +448,9 @@ float → numbers with decimal points
 str   → text
 ```
 
----
+## Integer — `int`
 
-# 1️⃣ Integer — `int`
-
-An integer is a **whole number**.
-
-Examples:
+An integer is a **whole number**. Examples:
 
 ```python
 -2
@@ -567,23 +460,11 @@ Examples:
 3298429342
 ```
 
-No decimal point.
+No decimal point. So `42` is an `int`.
 
-So:
+## Floating-point number — `float`
 
-```python
-42
-```
-
-is an `int`.
-
----
-
-# 2️⃣ Floating-point number — `float`
-
-A float is a number containing a decimal point.
-
-Examples:
+A float is a number containing a decimal point. Examples:
 
 ```python
 3.14
@@ -601,13 +482,9 @@ Important:
 
 Even though mathematically they represent the same quantity, **Python treats them as different data types.**
 
----
+## String — `str`
 
-# 3️⃣ String — `str`
-
-A string is **text**.
-
-You put text inside quotes:
+A string is **text**. You put text inside quotes:
 
 ```python
 "Hello"
@@ -631,34 +508,13 @@ Examples from the book:
 Notice this:
 
 ```text
-5
+5   ↓ number
+'5' ↓ text
 ```
 
-is an **integer**.
+`5` is an **integer**, but `'5'` is a **string**. That's a very important distinction.
 
-But:
-
-```text
-'5'
-```
-
-is a **string**.
-
-That's a very important distinction.
-
-```text
-5
-↓
-number
-
-'5'
-↓
-text
-```
-
----
-
-# 🔥 This connects directly to your earlier experiment
+## 🔥 Connection to your earlier experiment
 
 You previously typed:
 
@@ -672,9 +528,7 @@ and got:
 NameError
 ```
 
-because Python didn't know what `harish` was.
-
-But:
+because Python didn't know what `harish` was. But:
 
 ```python
 'harish'
@@ -688,13 +542,7 @@ Try these in your REPL:
 
 ```python
 42
-```
-
-```python
 42.0
-```
-
-```python
 '42'
 ```
 
@@ -706,23 +554,13 @@ They look similar, but Python sees:
 '42'  → str
 ```
 
----
-
-# 🧠 One subtle rule: int + float → float
-
-The book gives:
+## 🧠 One subtle rule: int + float → float
 
 ```python
 3 + 4
 ```
 
-→
-
-```text
-7
-```
-
-Both are integers:
+→ `7`. Both are integers:
 
 ```text
 int + int → int
@@ -734,63 +572,30 @@ But:
 3 + 4.0
 ```
 
-→
-
-```text
-7.0
-```
-
-Because one value is a float:
+→ `7.0`. One value is a float:
 
 ```text
 int + float → float
 ```
 
-And remember what we already saw:
+And remember: `16 / 4` gives `4.0` because `/` produces a float.
 
-```python
-16 / 4
-```
-
-gives:
-
-```text
-4.0
-```
-
-because `/` produces a float.
-
----
-
-# ⚠️ Empty string
-
-This:
+## ⚠️ Empty string
 
 ```python
 ''
 ```
 
-is also a string.
-
-It is an **empty string** — a string containing zero characters.
-
-Think:
+is also a string. It is an **empty string**: a string containing zero characters.
 
 ```text
-'hello'
- ↓
-5 characters
-
-''
- ↓
-0 characters
+'hello' ↓ 5 characters
+''      ↓ 0 characters
 ```
 
 We'll use empty strings a lot later when working with text.
 
----
-
-# ❌ `SyntaxError: unterminated string literal`
+## ❌ `SyntaxError: unterminated string literal`
 
 The book gives:
 
@@ -812,17 +617,13 @@ Hello, world!
 Where is the ending quote?
 ```
 
-There isn't one.
-
-So Python says:
+There isn't one, so Python says:
 
 ```text
 SyntaxError: unterminated string literal
 ```
 
-**Unterminated** basically means:
-
-> "It started, but it never got properly finished."
+**Unterminated** basically means: *"It started, but it never got properly finished."*
 
 Correct:
 
@@ -832,30 +633,19 @@ Correct:
 
 ---
 
-
-##
-##
-Yes bro. This section is very important because you're learning something deeper:
+# 4️⃣ Section 4: Operators with Different Data Types
 
 > **The same operator can behave differently depending on the data types involved.**
 
 We already saw `+` as addition. Now Python shows us that `+` can also mean **join text**.
 
----
-
-# 1️⃣ `+` with numbers → Addition
+## `+` with numbers → Addition
 
 ```python
 10 + 20
 ```
 
-Python sees:
-
-```text
-int + int
-```
-
-So:
+Python sees `int + int`:
 
 ```text
 10 + 20
@@ -863,31 +653,13 @@ So:
 30
 ```
 
----
-
-# 2️⃣ `+` with strings → Concatenation
+## `+` with strings → Concatenation
 
 ```python
 'Alice' + 'Bob'
 ```
 
-Python sees:
-
-```text
-str + str
-```
-
-So `+` means:
-
-> **Join these two strings together.**
-
-Result:
-
-```text
-'AliceBob'
-```
-
-Think:
+Python sees `str + str`, so `+` means: **join these two strings together.**
 
 ```text
 'Alice' + 'Bob'
@@ -897,7 +669,7 @@ Think:
 
 This is called **string concatenation**.
 
-### Another example
+Another example:
 
 ```python
 'Hello' + ' ' + 'World'
@@ -911,11 +683,7 @@ Result:
 
 The middle `' '` is a string containing one space.
 
----
-
-# ❌ String + Integer
-
-Now:
+## ❌ String + Integer
 
 ```python
 'Alice' + 42
@@ -927,75 +695,31 @@ Python gives:
 TypeError
 ```
 
-Why?
-
-Because Python sees:
-
-```text
-str + int
-```
-
-Python doesn't automatically decide:
-
-> "Oh, 42 probably means the text '42'."
-
-You have to explicitly convert it later.
-
-For example, eventually you'll learn:
+Python sees `str + int`. It doesn't automatically decide: *"Oh, 42 probably means the text '42'."* You have to explicitly convert it later. For example, eventually you'll learn:
 
 ```python
 'Alice' + str(42)
 ```
 
-→
-
-```text
-'Alice42'
-```
+→ `'Alice42'`
 
 **Don't worry about `str()` deeply yet.** The book explains that later.
 
----
-
-# 3️⃣ `*` with numbers → Multiplication
-
-You've already learned:
+## `*` with numbers → Multiplication
 
 ```python
 5 * 4
 ```
 
-Python sees:
+Python sees `int * int`, so `5 × 4 = 20`.
 
-```text
-int * int
-```
-
-So:
-
-```text
-5 × 4 = 20
-```
-
----
-
-# 4️⃣ `*` with a string + integer → Replication
-
-This is the interesting part:
+## `*` with a string + integer → Replication
 
 ```python
 'Alice' * 5
 ```
 
-Python sees:
-
-```text
-str * int
-```
-
-So `*` means:
-
-> **Repeat the string 5 times.**
+Python sees `str * int`, so `*` means: **repeat the string 5 times.**
 
 Result:
 
@@ -1017,49 +741,25 @@ Alice
 
 joined together.
 
----
-
-# ❌ String × String
+## ❌ String × String
 
 ```python
 'Alice' * 'Bob'
 ```
 
-Doesn't make sense to Python.
-
-```text
-str * str
-```
-
-So:
+Doesn't make sense to Python (`str * str`):
 
 ```text
 TypeError
 ```
 
----
-
-# ❌ String × Float
+## ❌ String × Float
 
 ```python
 'Alice' * 5.0
 ```
 
-Also doesn't work.
-
-Why?
-
-Because:
-
-```text
-5.0
-```
-
-is a **float**.
-
-Python's string replication requires an **integer** count.
-
-So:
+Also doesn't work, because `5.0` is a **float**. String replication requires an **integer** count.
 
 ```text
 'Alice' * 5     ✅
@@ -1067,11 +767,7 @@ So:
 'Alice' * 'Bob' ❌
 ```
 
----
-
-# 🧠 The important pattern
-
-Look at this:
+## 🧠 The important pattern
 
 | Expression  | Types       | Meaning            |
 | ----------- | ----------- | ------------------ |
@@ -1082,9 +778,7 @@ Look at this:
 | `'A' + 3`   | str + int   | ❌ TypeError        |
 | `'A' * 3.0` | str × float | ❌ TypeError        |
 
-So the **operator alone doesn't tell the whole story**.
-
-Python looks at:
+So the **operator alone doesn't tell the whole story**. Python looks at:
 
 ```text
 Operator
@@ -1094,8 +788,6 @@ What types are around it?
    ↓
 Decide what operation is valid
 ```
-
----
 
 ## 🎯 This is why data types matter
 
@@ -1109,36 +801,23 @@ Earlier we learned:
 Now you can see why that distinction matters.
 
 ```python
-5 + 5
+5 + 5        # → 10
+'5' + '5'    # → '55'
 ```
 
-→ `10`
+In the second example Python isn't doing mathematical addition. It's **joining two strings**.
 
-But:
-
-```python
-'5' + '5'
-```
-
-→ `'55'`
-
-Because Python isn't doing mathematical addition in the second example.
-
-It's **joining two strings**.
-
-### 📝 Remember
+## 📝 Remember
 
 > **Python's operators can behave differently depending on the data types they operate on.**
 
-##
-##
-## Assignment Statements - Variable Names
+---
 
-# 🧠 What is a variable?
+# 5️⃣ Section 5: Variables & Assignment Statements
+
+## 🧠 What is a variable?
 
 A variable gives a **name to a value** so you can use that value later.
-
-For example:
 
 ```python
 spam = 42
@@ -1166,19 +845,13 @@ spam → 42
 50
 ```
 
----
-
-# 📦 Assignment
-
-This:
+## 📦 Assignment
 
 ```python
 spam = 42
 ```
 
-is called an **assignment statement**.
-
-It has three important parts:
+is called an **assignment statement**. It has three parts:
 
 ```text
 spam = 42
@@ -1190,27 +863,15 @@ spam = 42
 
 ### ⚠️ Very important
 
-The `=` here does **not** mean mathematical equality.
-
-It means:
+The `=` here does **not** mean mathematical equality. It means:
 
 > **Store/assign this value to this variable name.**
 
-So:
+So `spam = 42` means: *"Make `spam` refer to the value `42`."*
 
-```python
-spam = 42
-```
+## 🧪 Following the book example
 
-means:
-
-> "Make `spam` refer to the value `42`."
-
----
-
-# 🧪 Let's follow the book example
-
-### Step 1
+**Step 1**
 
 ```python
 spam = 40
@@ -1222,21 +883,13 @@ Now:
 spam → 40
 ```
 
-If you type:
-
-```python
-spam
-```
-
-Python gives:
+Typing `spam` gives:
 
 ```text
 40
 ```
 
----
-
-### Step 2
+**Step 2**
 
 ```python
 eggs = 2
@@ -1249,13 +902,7 @@ spam → 40
 eggs → 2
 ```
 
-So:
-
-```python
-spam + eggs
-```
-
-becomes:
+So `spam + eggs` becomes:
 
 ```text
 40 + 2
@@ -1263,9 +910,7 @@ becomes:
 42
 ```
 
----
-
-### Step 3
+**Step 3**
 
 ```python
 spam + eggs + spam
@@ -1279,31 +924,17 @@ Python gets:
      82
 ```
 
-So:
+So: `82`
 
-```text
-82
-```
-
----
-
-# 🔥 The important part: overwriting
-
-Now:
+## 🔥 The important part: overwriting
 
 ```python
 spam = spam + 2
 ```
 
-This can look strange initially.
+This can look strange at first. Let's break it down.
 
-Let's break it down.
-
-Python first looks at the **right side**:
-
-```text
-spam + 2
-```
+Python first looks at the **right side**: `spam + 2`
 
 Current value:
 
@@ -1322,12 +953,6 @@ Therefore:
 Then Python assigns that result back to `spam`:
 
 ```text
-spam = 42
-```
-
-So now:
-
-```text
 Before:
 
 spam → 40
@@ -1339,17 +964,13 @@ spam → 42
 
 This is called **overwriting/reassigning the variable**.
 
----
-
-# 🏷️ String example
+## 🏷️ String example
 
 The same thing works with text:
 
 ```python
 spam = 'Hello'
 ```
-
-Now:
 
 ```text
 spam → 'Hello'
@@ -1361,21 +982,15 @@ Then:
 spam = 'Goodbye'
 ```
 
-Now:
-
 ```text
 spam → 'Goodbye'
 ```
 
 The variable's value has been replaced.
 
----
+## 🧠 A small correction to the "box" analogy
 
-# 🧠 One small correction to the "box" analogy
-
-The book itself says the **name-tag analogy** can be better.
-
-Instead of thinking:
+The book itself says the **name-tag analogy** is better. Instead of thinking:
 
 ```text
 ┌─────────────┐
@@ -1391,9 +1006,7 @@ Think:
 spam ─────► 42
 ```
 
-The name `spam` is associated with the value `42`.
-
-Later:
+The name `spam` is associated with the value `42`. Later:
 
 ```text
 spam ─────► 'Goodbye'
@@ -1404,28 +1017,23 @@ The association changed.
 You don't need to understand Python's internal memory model yet. **Just use this mental model for now.**
 
 ---
-##
-##
-# 🧠 What is a variable name?
+
+# 6️⃣ Section 6: Variable Names
+
+## 🧠 What is a variable name?
 
 A variable name is simply the **name you give to a value**.
-
-For example:
 
 ```python
 user_name = "Harish"
 ```
-
-Here:
 
 ```text
 user_name → variable name
 "Harish"  → value
 ```
 
-A good name should tell you **what the value represents**.
-
-Instead of:
+A good name should tell you **what the value represents**. Instead of:
 
 ```python
 x = 24
@@ -1439,9 +1047,7 @@ user_age = 24
 
 When you read the code later, `user_age` immediately makes more sense.
 
----
-
-# 📋 Python's 4 naming rules
+## 📋 Python's 4 naming rules
 
 ### 1. ❌ No spaces
 
@@ -1459,11 +1065,9 @@ user_name = "Harish"
 
 Use `_` when you want to separate words.
 
----
-
 ### 2. ✅ Letters, numbers and `_` are allowed
 
-These are valid:
+Valid:
 
 ```python
 username
@@ -1473,13 +1077,11 @@ _42
 TOTAL_SUM
 ```
 
-But special characters such as `$` aren't allowed.
+Special characters such as `$` aren't allowed:
 
 ```python
 TOTAL_$UM   ❌
 ```
-
----
 
 ### 3. ❌ Can't start with a number
 
@@ -1495,21 +1097,11 @@ Correct:
 account4 = 100
 ```
 
-Also:
-
-```python
-_42 = 42
-```
-
-is valid because `_` can be the first character.
-
----
+Also, `_42 = 42` is valid because `_` can be the first character.
 
 ### 4. ❌ Can't use Python keywords
 
-Some words already have a special meaning in Python.
-
-For example:
+Some words already have a special meaning in Python:
 
 ```python
 if
@@ -1517,17 +1109,11 @@ for
 return
 ```
 
-You can't use them as ordinary variable names.
+You can't use them as ordinary variable names. We'll learn these words properly later.
 
-We'll learn these words properly later.
+## 🔥 Case-sensitive
 
----
-
-# 🔥 Case-sensitive
-
-This is **very important**.
-
-Python treats these as four different variable names:
+This is **very important**. Python treats these as four different variable names:
 
 ```python
 spam
@@ -1543,41 +1129,17 @@ age = 20
 Age = 30
 ```
 
-Now:
-
-```python
-age
-```
-
-gives:
-
-```text
-20
-```
-
-while:
-
-```python
-Age
-```
-
-gives:
-
-```text
-30
-```
+`age` gives `20`, while `Age` gives `30`.
 
 ### 🧠 Remember
 
 > **Python cares about uppercase and lowercase letters.**
 
----
-
-# 🐍 Snake_case vs camelCase
+## 🐍 Snake_case vs camelCase
 
 The book explains two common styles.
 
-### Snake case
+**Snake case**
 
 ```python
 user_name
@@ -1587,7 +1149,7 @@ account_number
 
 Words are separated using `_`.
 
-### camelCase
+**camelCase**
 
 ```python
 userName
@@ -1597,11 +1159,7 @@ accountNumber
 
 The second word starts with a capital letter.
 
-The book explains that **both work**. Python doesn't care which style you choose.
-
-But the current book has chosen **snake_case**.
-
-So for **our Python learning**, we'll use:
+The book explains that **both work**. Python doesn't care which style you choose. But the book has chosen **snake_case**, so for **our Python learning**, we'll use:
 
 ```python
 user_name
@@ -1613,15 +1171,11 @@ log_file
 
 That's a good habit to build now.
 
----
-
-# 🎯 One important distinction
+## 🎯 One important distinction
 
 There are two separate things:
 
-### Python rules
-
-These determine whether the variable name is **valid**.
+**Python rules** determine whether the variable name is **valid**:
 
 ```python
 user_name     ✅
@@ -1629,9 +1183,7 @@ user name     ❌
 4account      ❌
 ```
 
-### Naming style
-
-This determines how we **choose to write valid names**.
+**Naming style** determines how we **choose to write valid names**:
 
 ```python
 user_name     ← snake_case
@@ -1641,3 +1193,324 @@ userName      ← camelCase
 Python accepts both.
 
 ---
+
+# 7️⃣ Section 7: Your First Python Program
+
+Until now, you've been doing this:
+
+```text
+PowerShell
+   ↓
+python
+   ↓
+>>>
+   ↓
+write one instruction
+   ↓
+immediate result
+```
+
+That's the **interactive shell / REPL**.
+
+Now we're learning the **file editor**.
+
+## 🧠 REPL vs Python file
+
+### REPL
+
+You type:
+
+```python
+>>> print("Hello")
+Hello
+>>>
+```
+
+Python executes it immediately.
+
+Good for:
+
+* Testing a small idea
+* Experimenting
+* Learning syntax
+
+### `.py` file
+
+You create a file:
+
+```text
+hello.py
+```
+
+and put multiple instructions inside:
+
+```python
+print("Hello")
+print("How are you?")
+name = input(">")
+print(name)
+```
+
+Then you run the **whole program**.
+
+Think:
+
+```text
+REPL
+→ one instruction at a time
+
+.py file
+→ many instructions → run the program
+```
+
+## 🎯 Since you're using VS Code
+
+The book talks about **Mu**, but you don't need to switch to Mu. We'll do the same thing in **VS Code**.
+
+Create a folder for our Python learning, for example:
+
+```text
+Red-Team-Journey
+└── Python
+    └── Chapter-01
+```
+
+Inside it create:
+
+```text
+hello.py
+```
+
+Then put the book's program into that file.
+
+## 🔍 Let's understand the program
+
+Don't try to understand every function yet. Some of them are concepts the book is introducing for the first time.
+
+### 1. `print()` with a string
+
+```python
+print('Hello, world!')
+```
+
+Displays:
+
+```text
+Hello, world!
+```
+
+### 2. Displaying a question
+
+```python
+print('What is your name?')
+```
+
+Displays the question.
+
+### 3. `input()`
+
+```python
+my_name = input('>')
+```
+
+This is important. `input()` waits for the user to type something. For example:
+
+```text
+>Harish
+```
+
+Then Python stores that text in `my_name`:
+
+```text
+my_name → "Harish"
+```
+
+### 4. String concatenation in `print()`
+
+```python
+print('It is good to meet you, ' + my_name)
+```
+
+Now we combine two strings:
+
+```text
+"It is good to meet you, "
+        +
+    "Harish"
+```
+
+Result:
+
+```text
+It is good to meet you, Harish
+```
+
+This connects directly to the **string concatenation** concept we just learned.
+
+### 5. `len()`
+
+```python
+len(my_name)
+```
+
+`len()` gives the **length** of the value. If `my_name = "Al"`, then:
+
+```text
+len(my_name)
+↓
+2
+```
+
+We'll study `len()` properly as we continue.
+
+### 6. `input()` returns text
+
+```python
+my_age = input('>')
+```
+
+The user enters something such as:
+
+```text
+4
+```
+
+But there is an important thing happening here that the book is about to teach: **`input()` gives you text.**
+
+So even though you typed `4`, Python initially treats it as:
+
+```text
+"4"
+```
+
+not the integer:
+
+```text
+4
+```
+
+### 7. Converting types: `str(int(...))`
+
+```python
+str(int(my_age) + 1)
+```
+
+This is a chain:
+
+```text
+my_age
+   ↓
+int(my_age)
+   ↓
+convert text → integer
+   ↓
++ 1
+   ↓
+str(...)
+   ↓
+convert result → text
+```
+
+If the user entered `4`, then:
+
+```text
+"4"
+ ↓
+4
+ ↓
+4 + 1
+ ↓
+5
+ ↓
+"5"
+```
+
+Then it can be joined with the surrounding string:
+
+```python
+'You will be ' + str(int(my_age) + 1) + ' in a year.'
+```
+
+Result:
+
+```text
+You will be 5 in a year.
+```
+
+**Don't worry if that last line looks complicated right now.** The book is intentionally showing you several concepts together, and we'll break them down one by one.
+
+## 💡 New concept: comments
+
+You'll see:
+
+```python
+# This program says hello and asks for my name.
+```
+
+Anything after `#` on that line is a **comment**. Python doesn't execute it as an instruction. It's there for humans to explain the code.
+
+For example:
+
+```python
+print("Hello")  # Display a greeting
+```
+
+Python executes `print("Hello")` and ignores:
+
+```text
+# Display a greeting
+```
+
+## ▶️ Program execution
+
+When you run `hello.py`, Python starts at the top and executes the instructions in order:
+
+```text
+Line 1
+  ↓
+Line 2
+  ↓
+Line 3
+  ↓
+Line 4
+  ↓
+...
+  ↓
+Last line
+  ↓
+Program terminates
+```
+
+**Terminates = stops running.**
+
+Then the REPL prompt appears again:
+
+```text
+>>>
+```
+
+That means:
+
+> The program finished, and Python is ready for another interactive instruction.
+
+## 🧠 Your mental model now
+
+You should now understand these as two different tools:
+
+```text
+             PYTHON
+                │
+       ┌────────┴────────┐
+       │                 │
+      REPL              .py FILE
+       │                 │
+   Experiment         Full program
+       │                 │
+   One instruction    Many instructions
+       │                 │
+   Immediate result    Run when needed
+```
+
+---
+
+*End of notes.*
