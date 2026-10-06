@@ -1,0 +1,1157 @@
+# Python Learning Notes: Day 3 and Day 4
+
+Covers the Chapter 2 flow control statements (`if`, `else`, `elif`), practice questions, and the SOC Login Analyzer challenge with its review.
+
+<a id="contents"></a>
+
+## Contents
+
+1. [Part 1: Flow Control Statements: if and else](#part-2)
+2. [Part 2: elif: Else If](#part-3)
+3. [Part 3: Practice: Predicting if/elif/else Output](#part-4)
+4. [Part 4: Challenge: SOC Login Analyzer](#part-5)
+5. [Part 5: Challenge Review: Test Results and Feedback](#part-6)
+
+---
+<a id="part-1"></a>
+
+```text
+═══════════════════════ PART 2 : START ═══════════════════════
+```
+
+# Part 2: Flow Control Statements: if and else
+
+The flow control statements are the diamonds in the flowchart. They are the actual decisions your programs make. Two statements come first:
+
+- `if`
+- `else`
+
+Think of the flowchart like a decision gate:
+
+```text
+              condition
+                  │
+           ┌──────┴──────┐
+         True           False
+           │               │
+       do this          skip / do else
+```
+
+## 1. `if` Statement
+
+### What is it?
+
+An `if` statement means:
+
+> "If this condition is True, execute this block."
+
+The structure is:
+
+```python
+if condition:
+    code
+```
+
+There are 4 important parts:
+
+```python
+if name == 'Alice':
+    print('Hi, Alice.')
+```
+
+### Break it down
+
+```text
+if
+│
+├── keyword
+│
+name == 'Alice'
+│
+├── condition
+│
+:
+│
+├── tells Python a block is coming
+│
+print('Hi, Alice.')
+│
+└── indented if-block
+```
+
+### Trace it like Python
+
+Suppose:
+
+```python
+name = 'Alice'
+
+if name == 'Alice':
+    print('Hi, Alice.')
+```
+
+**Step 1.** Python executes:
+
+```python
+name = 'Alice'
+```
+
+Now:
+
+```text
+name → 'Alice'
+```
+
+**Step 2.** Python reaches:
+
+```python
+if name == 'Alice':
+```
+
+It asks:
+
+```text
+Is 'Alice' == 'Alice' ?
+```
+
+Result:
+
+```text
+True
+```
+
+**Step 3.** Because it's `True`, Python enters the indented block:
+
+```python
+print('Hi, Alice.')
+```
+
+Output:
+
+```text
+Hi, Alice.
+```
+
+### Change one thing
+
+```python
+name = 'Bob'
+
+if name == 'Alice':
+    print('Hi, Alice.')
+```
+
+Trace:
+
+```text
+name → 'Bob'
+
+        ↓
+
+name == 'Alice'
+
+        ↓
+
+'Bob' == 'Alice'
+
+        ↓
+
+      False
+
+        ↓
+
+Skip the indented block
+```
+
+So nothing is printed. That's the important idea of `if`:
+
+```text
+True  → execute the clause
+False → skip the clause
+```
+
+## 2. `else` Statement
+
+Now imagine we don't want the program to do nothing when the condition is `False`. We can give it another path:
+
+```python
+name = 'Alice'
+
+if name == 'Alice':
+    print('Hi, Alice.')
+else:
+    print('Hello, stranger.')
+```
+
+The flow becomes:
+
+```text
+              name == 'Alice' ?
+                    │
+             ┌──────┴──────┐
+           True           False
+             │               │
+             ↓               ↓
+     Hi, Alice.       Hello, stranger.
+             │               │
+             └───────┬───────┘
+                     ↓
+                    End
+```
+
+### Important difference
+
+`if` has a condition:
+
+```python
+if name == 'Alice':
+```
+
+But `else` does not have a condition:
+
+```python
+else:
+```
+
+Because `else` simply means:
+
+> "If the `if` condition was False, do this instead."
+
+## Real-Time Experiment
+
+Open your Python REPL and run:
+
+```python
+name = 'Alice'
+
+if name == 'Alice':
+    print('Hi, Alice.')
+else:
+    print('Hello, stranger.')
+```
+
+You should get:
+
+```text
+Hi, Alice.
+```
+
+Then change `name`:
+
+```python
+name = 'Bob'
+```
+
+Run the whole code again. You should get:
+
+```text
+Hello, stranger.
+```
+
+## Your Turn
+
+Before you run this, predict the output first:
+
+```python
+name = 'Tom'
+
+if name == 'Alice':
+    print('Hi, Alice.')
+else:
+    print('Hello, stranger.')
+```
+
+What will Python print, and why?
+
+```text
+════════════════════════ PART 2 : END ════════════════════════
+```
+
+[Back to contents](#contents) | [Next: Part 3](#part-3)
+
+---
+
+<a id="part-2"></a>
+
+```text
+═══════════════════════ PART 3 : START ═══════════════════════
+```
+
+# Part 3: elif: Else If
+
+## 1. What is it?
+
+`elif` means:
+
+> "The previous condition was False, so check this new condition."
+
+Basic structure:
+
+```python
+if condition1:
+    code
+elif condition2:
+    code
+```
+
+So the flow is:
+
+```text
+             if condition
+                  │
+           ┌──────┴──────┐
+         True           False
+           │               │
+        execute        check elif
+                           │
+                    ┌──────┴──────┐
+                  True           False
+                    │               │
+                 execute         continue
+```
+
+## 2. The Alice Example
+
+From the book:
+
+```python
+name = 'Alice'
+age = 33
+
+if name == 'Alice':
+    print('Hi, Alice.')
+elif age < 12:
+    print('You are not Alice, kiddo.')
+```
+
+Trace:
+
+**Step 1.** Current values:
+
+```text
+name → 'Alice'
+age  → 33
+```
+
+**Step 2.** Python checks `name == 'Alice'`:
+
+```text
+'Alice' == 'Alice'
+       ↓
+      True
+```
+
+So Python executes:
+
+```python
+print('Hi, Alice.')
+```
+
+Output:
+
+```text
+Hi, Alice.
+```
+
+### Important
+
+Python does **not** check the `elif` anymore. Even though `age < 12` is also a condition, Python doesn't care about it because the first `if` was already `True`.
+
+This is one of the most important rules:
+
+> Once one condition in an if/elif chain is True, Python executes that clause and skips the remaining elif clauses.
+
+## 3. What if the `if` is False?
+
+```python
+name = 'Bob'
+age = 10
+
+if name == 'Alice':
+    print('Hi, Alice.')
+elif age < 12:
+    print('You are not Alice, kiddo.')
+```
+
+Trace:
+
+```text
+name == 'Alice'
+     ↓
+   False
+     ↓
+check elif
+     ↓
+age < 12
+     ↓
+10 < 12
+     ↓
+   True
+     ↓
+"You are not Alice, kiddo."
+```
+
+Output:
+
+```text
+You are not Alice, kiddo.
+```
+
+So `elif` is only checked when the previous condition was `False`.
+
+## 4. Multiple `elif`
+
+The book's `vampire.py`:
+
+```python
+name = 'Carol'
+age = 3000
+
+if name == 'Alice':
+    print('Hi, Alice.')
+elif age < 12:
+    print('You are not Alice, kiddo.')
+elif age > 2000:
+    print('Unlike you, Alice is not an undead, immortal vampire.')
+elif age > 100:
+    print('You are not Alice, grannie.')
+```
+
+Trace:
+
+**First condition:** `name == 'Alice'`
+
+```text
+'Carol' == 'Alice'
+       ↓
+     False
+```
+
+Continue.
+
+**Second condition:** `age < 12`
+
+```text
+3000 < 12
+   ↓
+ False
+```
+
+Continue.
+
+**Third condition:** `age > 2000`
+
+```text
+3000 > 2000
+     ↓
+    True
+```
+
+So Python executes:
+
+```python
+print('Unlike you, Alice is not an undead, immortal vampire.')
+```
+
+And then it stops checking the remaining `elif` statements, even though `age > 100` is also `True`.
+
+### The BIG rule
+
+Suppose we have:
+
+```python
+if A:
+    ...
+elif B:
+    ...
+elif C:
+    ...
+elif D:
+    ...
+```
+
+Python checks from top to bottom:
+
+```text
+A → False
+     ↓
+B → False
+     ↓
+C → True
+     ↓
+EXECUTE C
+     ↓
+STOP
+```
+
+It does not continue looking for another `True`. Therefore:
+
+> At most ONE clause executes in an if/elif chain.
+
+And without `else`, it's possible that:
+
+> NONE of the clauses execute.
+
+## 5. Why order matters
+
+This is the really important part. The book changes the code to:
+
+```python
+name = 'Carol'
+age = 3000
+
+if name == 'Alice':
+    print('Hi, Alice.')
+elif age < 12:
+    print('You are not Alice, kiddo.')
+elif age > 100:
+    print('You are not Alice, grannie.')
+elif age > 2000:
+    print('Unlike you, Alice is not an undead, immortal vampire.')
+```
+
+Look carefully: `age > 100` now comes before `age > 2000`. With `age = 3000`, Python checks:
+
+```text
+3000 > 100
+     ↓
+    True
+```
+
+Python immediately executes:
+
+```python
+print('You are not Alice, grannie.')
+```
+
+Then it stops. It never reaches `elif age > 2000:`, even though `3000 > 2000` is also `True`.
+
+### Think like a security analyst
+
+Imagine these rules:
+
+```text
+Rule 1 → Is age < 12?
+Rule 2 → Is age > 100?
+Rule 3 → Is age > 2000?
+```
+
+For `age = 3000`, both Rule 2 and Rule 3 are technically true. But your program says:
+
+> "The first matching rule wins."
+
+So Rule 2 wins. That's why condition order matters.
+
+## 6. Adding `else`
+
+```python
+name = 'Carol'
+age = 3000
+
+if name == 'Alice':
+    print('Hi, Alice.')
+elif age < 12:
+    print('You are not Alice, kiddo.')
+else:
+    print('You are neither Alice nor a little kid.')
+```
+
+Here:
+
+```text
+if       → False
+   ↓
+elif     → False
+   ↓
+else     → execute
+```
+
+So the output is:
+
+```text
+You are neither Alice nor a little kid.
+```
+
+### Important difference
+
+Without `else`:
+
+```text
+if       False
+elif     False
+→ nothing executes
+```
+
+With `else`:
+
+```text
+if       False
+elif     False
+else     → executes
+```
+
+Therefore, with an `else` at the end, exactly one clause will execute.
+
+## Final Mental Model
+
+```text
+if
+│
+├── True  → execute → STOP
+│
+└── False
+      ↓
+    elif
+      │
+      ├── True  → execute → STOP
+      │
+      └── False
+            ↓
+          next elif
+            │
+            ...
+            ↓
+          else
+            ↓
+          execute
+```
+
+### Remember
+
+`if` starts the decision. `elif` checks another condition only if previous conditions were `False`. `else` handles everything remaining.
+
+And the most important rule:
+
+> **Python checks an if/elif chain from top to bottom, and the first True condition wins.**
+
+```text
+════════════════════════ PART 3 : END ════════════════════════
+```
+
+[Back to contents](#contents) | [Next: Part 4](#part-4)
+
+---
+
+<a id="part-3"></a>
+
+```text
+═══════════════════════ PART 4 : START ═══════════════════════
+```
+
+# Part 4: Practice: Predicting if/elif/else Output
+
+## Question 1
+
+Predict the output first, without running it:
+
+```python
+age = 25
+
+if age < 12:
+    print('Child')
+elif age > 20:
+    print('Adult')
+elif age > 50:
+    print('Older Adult')
+else:
+    print('Unknown')
+```
+
+What will Python print, and why? Trace the conditions one by one.
+
+### Your answer
+
+```text
+Adult
+```
+
+Correct. Trace:
+
+```python
+age = 25
+```
+
+**First condition:** `age < 12`
+
+```text
+25 < 12 → False
+```
+
+So Python skips `Child`.
+
+**Second condition:** `age > 20`
+
+```text
+25 > 20 → True
+```
+
+So Python executes:
+
+```python
+print('Adult')
+```
+
+Output:
+
+```text
+Adult
+```
+
+### Python stops checking
+
+It does not check `elif age > 50:`, even though that condition would be:
+
+```text
+25 > 50 → False
+```
+
+The important point: once `age > 20` became `True`, Python executed that clause and skipped everything below it.
+
+### Mental model
+
+```text
+age = 25
+
+age < 12 ?
+   ↓
+ False
+   ↓
+age > 20 ?
+   ↓
+ True ✓
+   ↓
+print("Adult")
+   ↓
+STOP
+```
+
+You understood the **first-True-wins** rule.
+
+## Question 2
+
+A slightly tricky one to make sure the condition-order concept is really clear:
+
+```python
+age = 3000
+
+if age > 100:
+    print('A')
+elif age > 2000:
+    print('B')
+else:
+    print('C')
+```
+
+What will it print: A, B, or C? And why?
+
+```text
+════════════════════════ PART 4 : END ════════════════════════
+```
+
+[Back to contents](#contents) | [Next: Part 5](#part-5)
+
+---
+
+<a id="part-4"></a>
+
+```text
+═══════════════════════ PART 5 : START ═══════════════════════
+```
+
+# Part 5: Challenge: SOC Login Analyzer
+
+This challenge tests everything learned so far:
+
+- Variables
+- Strings
+- Integers / Floats
+- Input
+- Type conversion
+- Operators
+- Comparisons
+- Boolean operators
+- `if`
+- `elif`
+- `else`
+
+The problem is given without the solution. Think and build it yourself.
+
+## Scenario
+
+You're building a tiny security tool. A user enters:
+
+- their username
+- their password
+- their number of failed login attempts
+
+Your program should decide what message to display.
+
+## Requirements
+
+Ask the user:
+
+```text
+Enter username:
+Enter password:
+Enter failed login attempts:
+```
+
+Then apply these rules.
+
+### Rule 1
+
+If the username is `admin` and the password is `Cyber@123`, print:
+
+```text
+Login successful.
+```
+
+### Rule 2
+
+Otherwise, if the failed login attempts are 5 or more, print:
+
+```text
+Account locked.
+```
+
+### Rule 3
+
+Otherwise, if the username is correct but the password is wrong, print:
+
+```text
+Wrong password.
+```
+
+### Rule 4
+
+Otherwise, print:
+
+```text
+Invalid username.
+```
+
+## Your Mission
+
+Don't worry about making it perfect immediately. Think using this chain:
+
+```text
+What information do I need?
+        ↓
+What variables should store it?
+        ↓
+What type will each input return?
+        ↓
+What conditions do I need?
+        ↓
+Which condition should come first?
+        ↓
+What should happen for each result?
+```
+
+### One important clue
+
+Remember: `input()` always gives you a string. So think carefully about:
+
+```text
+username        → ?
+password        → ?
+failed attempts → ?
+```
+
+You will need your knowledge from Chapter 1 here.
+
+## Step 1: Plan the Logic First
+
+Don't write the complete code immediately. First write only the planned logic, something like:
+
+```text
+1. Ask for username
+2. Ask for password
+3. Ask for failed attempts
+4. ...
+```
+
+The logic is checked without giving the code. After the logic is correct, you write the Python yourself.
+
+```text
+════════════════════════ PART 5 : END ════════════════════════
+```
+
+[Back to contents](#contents) | [Next: Part 6](#part-6)
+
+---
+
+<a id="part-5"></a>
+
+```text
+═══════════════════════ PART 6 : START ═══════════════════════
+```
+
+# Part 6: Challenge Review: Test Results and Feedback
+
+## Test Runs
+
+Terminal output from the program (`test.py`):
+
+```text
+user@boss:~/Desktop$ python3.14 test.py
+Enter Your Name:
+Name: admin
+Enter Your Password:
+Password: Cyber@123
+Enter Your Faild Login Attempt's:
+Attempt's: 3
+Traceback (most recent call last):
+  File "/home/user/Desktop/test.py", line 11, in <module>
+    if c_name == name and c_password == password:
+                                        ^^^^^^^^
+NameError: name 'password' is not defined. Did you mean: 'Password'?
+user@boss:~/Desktop$ python3.14 test.py
+Enter Your Name:
+Name: admin
+Enter Your Password:
+Password: Cyber@123
+Enter Your Faild Login Attempt's:
+Attempt's: 2
+Login Successful...
+user@boss:~/Desktop$ python3.14 test.py
+Enter Your Name:
+Name: Harish
+Enter Your Password:
+Password: Cyber1223
+Enter Your Faild Login Attempt's:
+Attempt's: 5
+Account Locked
+user@boss:~/Desktop$ python3.14 test.py
+Enter Your Name:
+Name: admin
+Enter Your Password:
+Password: 123123
+Enter Your Faild Login Attempt's:
+Attempt's: 2
+Traceback (most recent call last):
+  File "/home/user/Desktop/test.py", line 15, in <module>
+    elif name == "admin" and password != Cyber@123:
+                                         ^^^^^
+NameError: name 'Cyber' is not defined
+user@boss:~/Desktop$ python3.14 test.py
+Enter Your Name:
+Name: admin
+Enter Your Password:
+Password: 1231
+Enter Your Faild Login Attempt's:
+Attempt's: 2
+Wrong Password
+user@boss:~/Desktop$ python3.14 test.py
+Enter Your Name:
+Name: harish
+Enter Your Password:
+Password: aldjasdlk
+Enter Your Faild Login Attempt's:
+Attempt's: 2
+Invalid UserName.
+user@boss:~/Desktop$
+```
+
+This was a good attempt. You didn't just write the code: you ran multiple test cases and found real Python errors yourself. That is exactly how to practice.
+
+## Your Logic Works
+
+| Test                                | Result             |
+| ----------------------------------- | ------------------ |
+| Correct username + correct password | Login Successful   |
+| 5 failed attempts                   | Account Locked     |
+| Correct username + wrong password  | Wrong Password     |
+| Wrong username                      | Invalid Username   |
+
+So your `if` → `elif` → `elif` → `else` thinking is working.
+
+## You Found 2 Real Python Mistakes
+
+### 1. `password` vs `Password`
+
+Your first error:
+
+```text
+NameError: name 'password' is not defined.
+Did you mean: 'Password'?
+```
+
+Look at your code:
+
+```python
+password = input("Password: ")
+```
+
+You created `password`, but the error shows Python was looking for `Password`. Python is case-sensitive. These are different variables:
+
+```text
+password
+Password
+PASSWORD
+```
+
+> Remember: Python sees uppercase and lowercase as different names.
+
+### 2. `Cyber@123` needs quotes
+
+You had:
+
+```python
+elif name == "admin" and password != Cyber@123:
+```
+
+But earlier you correctly wrote:
+
+```python
+c_password = "Cyber@123"
+```
+
+The problem is that `Cyber@123` is not a string. Python tries to interpret it as Python code instead of text. That's why you got:
+
+```text
+NameError: name 'Cyber' is not defined
+```
+
+Your intended value is text, so it needs to be represented as a string:
+
+```python
+"Cyber@123"
+```
+
+But notice something important: you already created `c_password = "Cyber@123"`, so you already have the correct value stored in a variable.
+
+## What This Challenge Combined
+
+This challenge combined almost everything learned so far:
+
+```text
+                    Python knowledge
+                         │
+       ┌─────────────────┼──────────────────┐
+       ↓                 ↓                  ↓
+    Variables          Input            Data types
+       │                 │                  │
+       ↓                 ↓                  ↓
+ username/password    strings          int()
+       │
+       ↓
+   Comparisons
+       │
+       ↓
+ ==   !=   >=
+       │
+       ↓
+ Boolean operators
+       │
+       ↓
+      and
+       │
+       ↓
+   if / elif / else
+       │
+       ↓
+   Program decision
+```
+
+## A Good Test: Account Locked
+
+You tested:
+
+```text
+Name: Harish
+Password: Cyber1223
+Attempts: 5
+```
+
+and got:
+
+```text
+Account Locked
+```
+
+This is interesting because your program checks:
+
+```text
+1. Correct credentials?
+       ↓ No
+
+2. Attempts >= 5?
+       ↓ Yes
+
+3. STOP
+```
+
+So it never reaches the password-checking `elif`. That directly demonstrates the concept from the elif part:
+
+> The first True condition wins.
+
+## What You Experienced Yourself
+
+You didn't just learn `elif` from the book. You experienced it:
+
+```text
+if
+ ↓ False
+elif
+ ↓ False
+elif
+ ↓ True
+STOP
+```
+
+And you experienced bugs caused by small mistakes:
+
+```text
+password ≠ Password
+Cyber@123 ≠ "Cyber@123"
+```
+
+This is real programming.
+
+## Debugging Mindset
+
+You don't need to be afraid when you see an error. Your new mindset:
+
+```text
+Error
+  ↓
+What is Python complaining about?
+  ↓
+Which line?
+  ↓
+Which variable/value?
+  ↓
+What did I actually write?
+  ↓
+Fix
+  ↓
+Run again
+  ↓
+Verify
+```
+
+That investigation habit is very valuable for future cybersecurity work too.
+
+## Mentor Verdict
+
+| Area                      | Verdict            |
+| ------------------------- | ------------------ |
+| Concept understanding     | Good               |
+| Logic                     | Good               |
+| Testing                   | Very good          |
+| Python syntax and details | Still practicing   |
+
+Don't rewrite the whole program yet. First understand those two errors. Then continue with the next concept from the book.
+
+```text
+════════════════════════ PART 6 : END ════════════════════════
+```
+
+[Back to contents](#contents)
+
+---
+
+```text
+════════════════ END OF DAY 3 AND DAY 4 NOTES ════════════════
+```
