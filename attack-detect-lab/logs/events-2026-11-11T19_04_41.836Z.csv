@@ -1,0 +1,9 @@
+agent.name,package.name,package.version,vulnerability.description,vulnerability.severity,vulnerability.id
+ASUS-TUF-GAMING,Microsoft .NET Host FX Resolver - 6.0.16 (x64),48.67.58427,"NET, .NET Framework, and Visual Studio Security Feature Bypass Vulnerability",Critical,CVE-2024-0057
+ASUS-TUF-GAMING,Microsoft .NET Host FX Resolver - 6.0.16 (x64),48.67.58427,".NET, .NET Framework, and Visual Studio Elevation of Privilege Vulnerability",Critical,CVE-2023-36049
+ASUS-TUF-GAMING,Microsoft .NET Runtime - 6.0.16 (x64),48.67.58427,"NET, .NET Framework, and Visual Studio Security Feature Bypass Vulnerability",Critical,CVE-2024-0057
+ASUS-TUF-GAMING,Microsoft .NET Runtime - 6.0.16 (x64),48.67.58427,".NET, .NET Framework, and Visual Studio Elevation of Privilege Vulnerability",Critical,CVE-2023-36049
+ASUS-TUF-GAMING,Microsoft .NET Runtime - 6.0.16 (x64),6.0.16.32323,"NET, .NET Framework, and Visual Studio Security Feature Bypass Vulnerability",Critical,CVE-2024-0057
+ASUS-TUF-GAMING,Microsoft .NET Runtime - 6.0.16 (x64),6.0.16.32323,".NET, .NET Framework, and Visual Studio Elevation of Privilege Vulnerability",Critical,CVE-2023-36049
+ASUS-TUF-GAMING,Microsoft .NET Host - 6.0.16 (x64),48.67.58427,"NET, .NET Framework, and Visual Studio Security Feature Bypass Vulnerability",Critical,CVE-2024-0057
+ASUS-TUF-GAMING,Microsoft .NET Host - 6.0.16 (x64),48.67.58427,".NET, .NET Framework, and Visual Studio Elevation of Privilege Vulnerability",Critical,CVE-2023-36049
